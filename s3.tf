@@ -14,6 +14,6 @@ resource "aws_s3_bucket" "cdn" {
         Owner       = var.owner
         CreatedBy   = var.created_by
         CostCentre  = var.cost_centre
-        Terraform   = "True"
+        Terraform   = "true"
     }
 }
