@@ -59,7 +59,7 @@ resource "aws_cloudfront_distribution" "cdn" {
         Owner       = var.owner
         CreatedBy   = var.created_by
         CostCentre  = var.cost_centre
-        Terraform   = "True"
+        Terraform   = "true"
     }
 }
 
