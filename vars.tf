@@ -17,5 +17,5 @@ variable "cdn_ssl_cert_arn" {}
 variable "cdn_default_ttl" {}
 
 variable "wp_access_roles" {
-    type = "list"
+    type = list(string)
 }
