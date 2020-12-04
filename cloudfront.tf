@@ -2,16 +2,12 @@ resource "aws_cloudfront_distribution" "cdn" {
 
     origin {
         domain_name = aws_s3_bucket.cdn.bucket_regional_domain_name
-        origin_id   = var.cdn_domain_name
+        origin_id   = aws_s3_bucket.cdn.id
 
         s3_origin_config {
             origin_access_identity = aws_cloudfront_origin_access_identity.cdn.cloudfront_access_identity_path
         }
     }
-
-    aliases = [
-        var.cdn_domain_name
-    ]
 
     enabled             = true
     default_root_object = "index.html"
@@ -25,7 +21,7 @@ resource "aws_cloudfront_distribution" "cdn" {
         cached_methods         = [
             "GET",
             "HEAD"]
-        target_origin_id       = var.cdn_domain_name
+        target_origin_id       = aws_s3_bucket.cdn.id
         min_ttl                = 0
         default_ttl            = var.cdn_default_ttl
         max_ttl                = 31536000
@@ -64,5 +60,5 @@ resource "aws_cloudfront_distribution" "cdn" {
 }
 
 resource "aws_cloudfront_origin_access_identity" "cdn" {
-    comment = "CloudFront OAI for ${var.environment} ${var.cdn_domain_name}"
+    comment = "CloudFront OAI for ${var.environment} CDN s3 bucket (${aws_s3_bucket.cdn.id})"
 }
